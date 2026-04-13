@@ -1,0 +1,8 @@
+{
+  "name": "interview-calculator",
+  "private": true,
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "serve": "^14.2.4"
+  }
+}
