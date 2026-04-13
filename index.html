@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
     <title>電卓</title>
     <style>
         body {
@@ -56,11 +57,90 @@
         .operator:hover {
             background-color: #d9912c;
         }
+        .history-toggle {
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: #555;
+            color: white;
+        }
+        .history-toggle:hover {
+            background-color: #444;
+        }
+        #history {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.9em;
+        }
+        #history[hidden] {
+            display: none;
+        }
+        #history ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        #history .empty {
+            color: #888;
+            margin: 0;
+        }
+        #history .history-item {
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        #history .history-item:hover {
+            background-color: #d0d0d0;
+        }
+        .extras {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .tax-rate {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            color: white;
+            font-size: 0.9em;
+        }
+        .tax-rate input {
+            width: 60px;
+            padding: 6px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: right;
+        }
+        .extras button {
+            background-color: #4a90e2;
+            color: white;
+            font-size: 1em;
+        }
+        .extras button:hover {
+            background-color: #357ab8;
+        }
     </style>
 </head>
 <body>
     <div class="calculator">
         <input type="text" id="display" readonly>
+        <button id="btn-history" class="history-toggle">履歴</button>
+        <div id="history" hidden></div>
+        <div class="tax-rate">
+            <label for="tax-rate">税率</label>
+            <input id="tax-rate" type="number" value="10" min="0" step="1">
+            <span>%</span>
+        </div>
+        <div class="extras">
+            <button id="btn-tax-include">税込</button>
+            <button id="btn-tax-exclude">税抜</button>
+            <button id="btn-divmod">商余</button>
+        </div>
         <div class="buttons">
             <button data-testid="btn-clear">C</button>
             <button data-testid="btn-paren-left">(</button>
@@ -84,7 +164,7 @@
             <button data-testid="btn-equals" class="operator">=</button>
         </div>
     </div>
-    <script>
-    </script>
+    <script src="./node_modules/mathjs/lib/browser/math.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
